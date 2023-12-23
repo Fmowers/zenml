@@ -716,6 +716,9 @@ class SqlZenStore(BaseZenStore):
 
         Returns:
             The secrets store associated with this store.
+
+        Raises:
+            NotImplementedError: If no secrets store is configured.
         """
         if self._secrets_store is None:
             raise NotImplementedError(
@@ -3680,7 +3683,9 @@ class SqlZenStore(BaseZenStore):
 
         Args:
             secret_id: The ID of the secret to set the values of.
-            values: The values to set.
+
+        Returns:
+            The values of the secret.
         """
         return self.secrets_store.get_secret_values(
             secret_id=secret_id,
