@@ -3715,7 +3715,9 @@ class SqlZenStore(BaseZenStore):
             if v is None and k in existing_values:
                 del existing_values[k]
 
-        self._set_secret_values(secret_id=secret_id, values=existing_values)
+        self.secrets_store.update_secret_values(
+            secret_id=secret_id, secret_values=existing_values
+        )
 
         return existing_values
 
